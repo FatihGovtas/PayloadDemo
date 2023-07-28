@@ -21,6 +21,7 @@ import Header from "./component/Header"
 import CustomDrawerContent from "./component/CustomDrawerContent"
 import { PaperProvider } from 'react-native-paper';
 import darkTheme from "./styles/darkTheme"
+import CreateCategories from "./screens/CreateCategories"
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -55,6 +56,7 @@ export default class Router extends Component {
                 <Drawer.Screen name="Form Submissions" component={FormSubmissions} />
                 <Drawer.Screen name="Main Menu" component={MainMenu} />
                 <Drawer.Screen name="Profile" component={Profile} />
+                <Drawer.Screen name="CreateCategories" component={CreateCategories} />
             </Drawer.Navigator>
         )
     }

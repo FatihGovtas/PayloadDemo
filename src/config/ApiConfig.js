@@ -28,6 +28,15 @@ const PageEnum = {
     MainMenu: 'Main Menu',
 };
 
+const JsonData = {
+    categoriesData: {
+        name: '',
+        archived: false,
+    },
+
+};
+
+
 
 class ApiConfig {
 
@@ -42,6 +51,22 @@ class ApiConfig {
                 console.log(e)
             })
     }
+
+    sendDataToPayload = async (pageUrl, dataToSend) => {
+        try {
+            const response = await axios.post(cmsUrl+pageUrl, dataToSend);
+
+            if (response.status === 201) {
+                console.log('Veri başarıyla gönderildi!');
+                console.log('Sunucu tarafından dönen veri:', response.data);
+            } else {
+                console.log('Veri gönderirken bir hata oluştu.');
+            }
+        } catch (error) {
+            console.error('Hata:', error.message);
+        }
+    };
+
 
     newData = async (PageUrl, page) => {
         try {
@@ -130,5 +155,5 @@ class ApiConfig {
 
 }
 
-export { cmsUrl, PageEnum, PageUrl }
+export { cmsUrl, PageEnum, PageUrl, JsonData }
 export default new ApiConfig();

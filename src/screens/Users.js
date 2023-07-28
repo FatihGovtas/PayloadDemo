@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { DataTable, Checkbox } from 'react-native-paper';
 import ApiConfig, { PageEnum, PageUrl } from '../config/ApiConfig';
 import { observer, inject } from 'mobx-react';
-
+import styles from '../styles/pageStyles';
 
 const Users = inject("MainStore")(observer(({ MainStore, navigation }) => {
 
@@ -48,7 +48,7 @@ const Users = inject("MainStore")(observer(({ MainStore, navigation }) => {
   };
 
   // Sıralamaya göre ve arama sorgusuna göre verileri filtreleme
-  const filteredData = MainStore.data.filter((item) => item.email.toLowerCase().includes(MainStore.searchQuery.toLowerCase())
+  const filteredData = MainStore.data.filter((item) => item.email?.toLowerCase().includes(MainStore.searchQuery.toLowerCase())
   ).sort((a, b) => {
     if (MainStore.sortedField) {
       const aValue = a[MainStore.sortedField];
@@ -172,50 +172,3 @@ const Users = inject("MainStore")(observer(({ MainStore, navigation }) => {
 }));
 
 export default Users
-
-const styles = StyleSheet.create({
-  title_style: {
-    color: theme.colors.text,
-    fontSize: theme.fontSizes.large,
-  },
-  button_style: {
-    color: theme.colors.text,
-    backgroundColor: theme.colors.itemBackground,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 5,
-    borderRadius: 5,
-    marginLeft: 15,
-    height: 30,
-  },
-  input_style: {
-    padding: 8,
-    marginBottom: 8,
-    height: 50,
-    color: theme.colors.text,
-    backgroundColor: theme.colors.itemBackground,
-  },
-  searchBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: theme.colors.itemBackground,
-    paddingHorizontal: 12,
-    marginBottom: 10,
-  },
-  searchIcon: {
-    marginRight: 8,
-  },
-  input: {
-    flex: 1,
-    paddingVertical: 8,
-    height: 50,
-    color: theme.colors.text,
-  },
-  container: {
-    backgroundColor: theme.colors.itemBackground, // Gri arka plan rengi
-    padding: 10,
-  },
-  table_title: {
-    color: theme.colors.text,
-  },
-})

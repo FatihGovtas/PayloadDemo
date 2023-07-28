@@ -13,10 +13,8 @@ class MainStore {
     constructor() {
         makeObservable(this);
         autorun(() => {
-            //state değiştiğinde çalışır
         })
         reaction(() => this.data, data => {
-            //data değiştiğinde çalışır
             //this.setProps();
         })
     }
