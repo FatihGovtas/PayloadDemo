@@ -1,9 +1,15 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
+import MainStore from '../store/MainStore'
 
 const DrawerItem = ({ item, navigation }) => {
     return (
-        <TouchableOpacity style={styles.container} onPress={() => navigation.navigate(item)}>
+        <TouchableOpacity style={styles.container} onPress={() => {
+            MainStore.setData([]);
+            MainStore.setProps();
+            console.log(MainStore.data)
+            navigation.navigate(item)
+        }}>
             <Text style={styles.text_style}>{item}</Text>
         </TouchableOpacity>
     )

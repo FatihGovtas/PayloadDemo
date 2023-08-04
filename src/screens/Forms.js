@@ -87,7 +87,7 @@ const Forms = inject("MainStore")(observer(({ MainStore, navigation }) => {
       }>
         <View style={{ flexDirection: 'row', marginVertical: 15, alignItems: 'center', }}>
           <Text style={styles.title_style}>Forms</Text>
-          <TouchableOpacity style={styles.button_style}>
+          <TouchableOpacity style={styles.button_style} onPress={() => navigation.navigate('CreateForms')}>
             <Text style={[styles.title_style, { fontSize: theme.fontSizes.small }]}>Yeni Oluştur</Text>
           </TouchableOpacity>
         </View>
@@ -135,7 +135,7 @@ const Forms = inject("MainStore")(observer(({ MainStore, navigation }) => {
                 </DataTable.Cell>
                 <DataTable.Cell>{item.title}</DataTable.Cell>
                 <DataTable.Cell>{item.id}</DataTable.Cell>
-                <DataTable.Cell>{item.fields[0].blockType}</DataTable.Cell>
+                <DataTable.Cell>{item.fields[0]?.blockType}</DataTable.Cell>{/* burda düzenleme yap... */}
               </DataTable.Row>
             ))}
           </DataTable>

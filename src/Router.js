@@ -22,6 +22,11 @@ import CustomDrawerContent from "./component/CustomDrawerContent"
 import { PaperProvider } from 'react-native-paper';
 import darkTheme from "./styles/darkTheme"
 import CreateCategories from "./screens/CreateCategories"
+import CreateUsers from "./screens/CreateUsers"
+import CreatePosts from "./screens/CreatePosts"
+import CreateAlerts from "./screens/CreateAlerts"
+import CreatePages from "./screens/CreatePages"
+import CreateForms from "./screens/CreateForms"
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -57,6 +62,11 @@ export default class Router extends Component {
                 <Drawer.Screen name="Main Menu" component={MainMenu} />
                 <Drawer.Screen name="Profile" component={Profile} />
                 <Drawer.Screen name="CreateCategories" component={CreateCategories} />
+                <Drawer.Screen name="CreateUsers" component={CreateUsers} />
+                <Drawer.Screen name="CreatePosts" component={CreatePosts} />
+                <Drawer.Screen name="CreateAlerts" component={CreateAlerts} />
+                <Drawer.Screen name="CreatePages" component={CreatePages} />
+                <Drawer.Screen name="CreateForms" component={CreateForms} />
             </Drawer.Navigator>
         )
     }

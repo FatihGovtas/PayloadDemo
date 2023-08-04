@@ -15,6 +15,7 @@ const Posts = inject("MainStore")(observer(({ MainStore, navigation }) => {
   useEffect(() => {
     ApiConfig.getUser(navigation);
     ApiConfig.getData(PageUrl.Posts);
+    ApiConfig.getSecondData(PageUrl.Categories);
   }, []);
 
   const handleCheckboxToggle = (itemId) => {
@@ -91,7 +92,7 @@ const Posts = inject("MainStore")(observer(({ MainStore, navigation }) => {
       }>
         <View style={{ flexDirection: 'row', marginVertical: 15, alignItems: 'center', }}>
           <Text style={styles.title_style}>Posts</Text>
-          <TouchableOpacity style={styles.button_style}>
+          <TouchableOpacity style={styles.button_style} onPress={() => navigation.navigate('CreatePosts')}>
             <Text style={[styles.title_style, { fontSize: theme.fontSizes.small }]}>Yeni Oluştur</Text>
           </TouchableOpacity>
         </View>
@@ -140,7 +141,9 @@ const Posts = inject("MainStore")(observer(({ MainStore, navigation }) => {
                 <DataTable.Cell style={{ flex: 1 }}>
                   <Text>{item.title}</Text>
                 </DataTable.Cell>
-                <DataTable.Cell>{item.category[0].name}</DataTable.Cell>
+                <DataTable.Cell>{(item.category.length == 0) ? "" :
+                  item.category[0].name}
+                </DataTable.Cell>
                 <DataTable.Cell>{parseDate(item.publishDate)}</DataTable.Cell>
               </DataTable.Row>
             ))}

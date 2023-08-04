@@ -2,6 +2,7 @@ import axios from "axios";
 import { Alert } from "react-native";
 import MainStore from "../store/MainStore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import SecondStore from "../store/SecondStore";
 
 
 const cmsUrl = "https://demo.payloadcms.com/api/";
@@ -33,6 +34,95 @@ const JsonData = {
         name: '',
         archived: false,
     },
+    userData: {
+        name: '',
+        email: '',
+        password: '',
+        enableAPIKey: false
+    },
+    postsData: {
+        title: '',
+        category: [],
+        layout: [
+            {
+                columns: [
+                    {
+                        richText: [
+                            {
+                                children: [
+                                    {
+                                        text: ''
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                blockType: "content"
+            }
+        ],
+    },
+    alertsData: {
+        name: '',
+        placement: 'global',// global, documents
+        content: [
+            {
+                children: [
+                    {
+                        text: ''
+                    }
+                ]
+            }
+        ]
+    },
+    pagesData: {
+        title: '',
+        hero: {
+            basic: {
+                richText: [
+                    {
+                        children: [
+                            {
+                                text: ''
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        layout: [
+            {
+                columns: [
+                    {
+                        richText: [
+                            {
+                                children: [
+                                    {
+                                        text: ''
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                blockType: "content"
+            }
+        ],
+    },
+    formsData: {
+        title: '',
+        submitButtonLabel: '',
+        fields: [],
+        confirmationMessage: [
+            {
+                children: [
+                    {
+                        text: ''
+                    }
+                ]
+            }
+        ]
+    }
 
 };
 
@@ -52,9 +142,19 @@ class ApiConfig {
             })
     }
 
+    getSecondData = async (PageUrl) => {
+        axios.get(cmsUrl + PageUrl).then((res) => {
+            SecondStore.setData(res.data.docs);//store daki datayı set et
+            console.log(SecondStore.data)
+        })
+            .catch((e) => {
+                console.log(e)
+            })
+    }
+
     sendDataToPayload = async (pageUrl, dataToSend) => {
         try {
-            const response = await axios.post(cmsUrl+pageUrl, dataToSend);
+            const response = await axios.post(cmsUrl + pageUrl, dataToSend);
 
             if (response.status === 201) {
                 console.log('Veri başarıyla gönderildi!');

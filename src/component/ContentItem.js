@@ -1,8 +1,9 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import React from 'react'
 import Icon from 'react-native-vector-icons/EvilIcons'
-import { observer, inject } from 'mobx-react';
-const ContentItem = inject("MainStore")(observer(({ item, navigation, MainStore }) => {
+import MainStore from '../store/MainStore';
+
+const ContentItem = ({ item, navigation }) => {
     return (
         <TouchableOpacity style={styles.conteiner} onPress={() => {
             MainStore.setData([]);
@@ -17,7 +18,7 @@ const ContentItem = inject("MainStore")(observer(({ item, navigation, MainStore 
                 </TouchableOpacity> : null}
         </TouchableOpacity>
     )
-}));
+};
 
 export default ContentItem
 

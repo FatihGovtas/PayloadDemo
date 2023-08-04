@@ -5,9 +5,9 @@ import styles from '../styles/pageStyles';
 import { theme } from '../styles/theme';
 import ApiConfig, { JsonData, PageUrl } from '../config/ApiConfig';
 
-const CreateCategories = ({navigation}) => {
+const CreateCategories = ({ navigation, isModal }) => {
 
-    const [title, setTitle] = useState('[Başlıksız]');
+    const [title, setTitle] = useState('');
     const [isArchived, setIsArchived] = useState(false);
 
     const handleTitleChange = (text) => {
@@ -23,13 +23,17 @@ const CreateCategories = ({navigation}) => {
         sendData.name = title;
         sendData.archived = isArchived;
         ApiConfig.sendDataToPayload(PageUrl.Categories, sendData);
-        navigation.navigate('Categories');
+        if (!isModal) {
+            navigation.navigate('Categories');
+        } else {
+            ApiConfig.getSecondData(PageUrl.Categories);
+        }
     };
 
     return (
         <View style={{ paddingHorizontal: 15, backgroundColor: theme.colors.background, flex: 1, justifyContent: 'space-between' }}>
             <View>
-                <Text style={styles.title_style}>{title}</Text>
+                <Text style={styles.title_style}>{(isModal) ? "Yeni Category" : (title == "") ? "[Başlıksız]" : title}</Text>
                 <View style={{ marginVertical: 20 }}>
                     <Text style={[styles.table_title, { marginBottom: 10 }]}>Name</Text>
                     <TextInput
@@ -58,7 +62,7 @@ const CreateCategories = ({navigation}) => {
                 borderRadius: 5,
                 marginBottom: 25
             }} onPress={handleSave}>
-                <Text style={{color:theme.colors.secondary}}>Kaydet</Text>
+                <Text style={{ color: theme.colors.secondary }}>Kaydet</Text>
             </TouchableOpacity>
         </View>
     )

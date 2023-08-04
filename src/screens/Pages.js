@@ -89,7 +89,7 @@ const Pages = inject("MainStore")(observer(({ MainStore, navigation }) => {
       }>
         <View style={{ flexDirection: 'row', marginVertical: 15, alignItems: 'center', }}>
           <Text style={styles.title_style}>Pages</Text>
-          <TouchableOpacity style={styles.button_style}>
+          <TouchableOpacity style={styles.button_style} onPress={() => navigation.navigate('CreatePages')}>
             <Text style={[styles.title_style, { fontSize: theme.fontSizes.small }]}>Yeni Oluştur</Text>
           </TouchableOpacity>
         </View>

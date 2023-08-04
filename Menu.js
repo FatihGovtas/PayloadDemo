@@ -1,44 +1,43 @@
-import { MultipleSelectList } from 'react-native-dropdown-select-list'
+import React, { useState } from 'react';
+import { View, Text } from 'react-native';
+import SelectDropdown from 'react-native-select-dropdown';
+import Icon from 'react-native-vector-icons/FontAwesome'
 
-import { View, Text } from 'react-native'
-import React, { useState } from 'react'
-import { PaperProvider } from 'react-native-paper'
-import darkTheme from './src/styles/darkTheme'
-
-const Menu = () => {
-  const [selected, setSelected] = useState("")
-
-  const data = [
-    { key: '1', value: 'Mobiles', },
-    { key: '2', value: 'Appliances' },
-    { key: '3', value: 'Cameras' },
-    { key: '4', value: 'Computers', },
-    { key: '5', value: 'Vegetables' },
-    { key: '6', value: 'Diary Products' },
-    { key: '7', value: 'Drinks' },
-  ]
+const ExampleDropdown = () => {
+  const [selectedItem, setSelectedItem] = useState(null);
+  const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 
   return (
-    <PaperProvider theme={darkTheme}>
-      <MultipleSelectList
-        placeholder='Sütunlar'
-        searchPlaceholder='Ara'
-        boxStyles={{ backgroundColor: '#333333', width: 150, alignItems: 'center', justifyContent: 'center', borderRadius: 5 }}
-        inputStyles={{ color: 'white' }}
-        dropdownStyles={{ backgroundColor: '#333333', }}
-        dropdownTextStyles={{ color: 'white' }}
-        badgeTextStyles={{}}
-        checkBoxStyles={{ backgroundColor: 'white', }}
-        labelStyles={{ color: 'white' }}
-        setSelected={(val) => setSelected(val)}
-        data={data}
-        save="value"
-        onSelect={() => { }}
-        label="Categories"
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <SelectDropdown
+        data={countries}
+        buttonStyle={{ backgroundColor: '#222222', borderRadius: 5, paddingLeft:20 }}
+        renderDropdownIcon={() => {
+          return <Icon name="angle-down" size={25} color="white" />
+        }}
+        buttonTextStyle={{ color: 'white' }}
+        onSelect={(selectedItem, index) => {
+          console.log(selectedItem, index)
+          setSelectedItem(selectedItem);
+        }}
+        dropdownIconPosition='right'
+        dropdownStyle={{backgroundColor:'#444444', borderRadius:5}}
+        rowStyle={{}}
+        defaultButtonText='Categories'
+        rowTextStyle={{color:'white'}}
+        buttonTextAfterSelection={(selectedItem, index) => {
+          // text represented after item is selected
+          // if data array is an array of objects then return selectedItem.property to render after item is selected
+          return selectedItem
+        }}
+        rowTextForSelection={(item, index) => {
+          // text represented for each item in dropdown
+          // if data array is an array of objects then return item.property to represent item in dropdown
+          return item
+        }}
       />
-    </PaperProvider>
+    </View>
+  );
+};
 
-  )
-}
-
-export default Menu
+export default ExampleDropdown;
